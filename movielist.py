@@ -4,17 +4,27 @@ class MovieList(object):
   def __init__(self):
     self.movies = []
     self.moviesByYear = collections.defaultdict(list)
+    self.moviesByGenre = collections.defaultdict(list)
 
   def add(self, info):
     self.movies.append(info)
-  	# info == {'year': '1990', 'length': '111', ...}
-    year = info['year'] # '1990'
-    # moviesByYear['1990']
     last = len(self.movies) - 1
+    # Lookup by year
+    year = info['year']
     self.moviesByYear[year].append(last)
+    # Look by genre
+    genre = info['genre']
+    self.moviesByGenre[genre].append(last)
 
   def getByYear(self, year):
-    return self.moviesByYear[year]
+    indexes = self.moviesByYear[year]
+    return [self.movies[i] for i in indexes]
+
+  def getByGenre(self, genre):
+    indexes = self.moviesByGenre[genre]
+    return [self.movies[i] for i in indexes]
+
+
 
 m = MovieList()
 
@@ -29,7 +39,7 @@ while True:
 	'year': pieces[0],
 	'length': pieces[1],
 	'title': pieces[2],
-	'subject': pieces[3],
+	'genre': pieces[3],
 	'actor': pieces[4],
 	'actress': pieces[5],
 	'director': pieces[6],
@@ -39,4 +49,4 @@ while True:
   }
   m.add(movieInfo)
 
-print(len(m.getByYear('1990')))
+print(len(m.getByGenre('Comedy')))
