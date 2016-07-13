@@ -1,0 +1,2 @@
+Year;Length;Title;Subject;Actor;Actress;Director;Popularity;Awards;*Image
+INT;INT;STRING;CAT;CAT;CAT;CAT;INT;BOOL;STRING
